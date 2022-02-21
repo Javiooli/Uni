@@ -1,0 +1,48 @@
+public void inicialitzaDadesVall2000() {
+        llistaRemuntadors.buidar();
+        llistaPistes.buidar();
+        
+        if(this.getNom().equals("Nord")) {
+            Telecadira RM1 = new Telecadira("RM1", "En Servei", 35, false);      llistaRemuntadors.afegirRemuntador(RM1);
+            Teleesqui  RM2 = new Teleesqui ("RM2", "En Servei", 35, false);      llistaRemuntadors.afegirRemuntador(RM2);
+            Telecadira RM3 = new Telecadira("RM3", "En Servei", 35, false);      llistaRemuntadors.afegirRemuntador(RM3);
+            Teleesqui  RM4 = new Teleesqui ("RM4", "En Servei", 60, false);      llistaRemuntadors.afegirRemuntador(RM4);
+            Telecabina RM5 = new Telecabina("RM5", "En Servei", 60, false);      llistaRemuntadors.afegirRemuntador(RM5);
+            CintaTransportadora RM6 = new CintaTransportadora("RM6", "En Servei", 60, false); llistaRemuntadors.afegirRemuntador(RM6);
+        
+            Pista P1  = new Pista("P1",  "Negra",    0.8f, "Dura",      "Oberta");  llistaPistes.addPista(P1);
+            Pista P2  = new Pista("P2",  "Vermella", 1.1f, "Dura",      "Oberta");  llistaPistes.addPista(P2);
+            Pista P3  = new Pista("P3",  "Blava",    1.8f, "Pols",      "Oberta");  llistaPistes.addPista(P3);
+            Pista P4  = new Pista("P4",  "Vermella", 1.2f, "Dura",      "Oberta");  llistaPistes.addPista(P4);
+            Pista P5  = new Pista("P5",  "Blava",    2.1f, "Primavera", "Oberta");  llistaPistes.addPista(P5);
+            Pista P6  = new Pista("P6",  "Blava",    2.9f, "Pols",      "Oberta");  llistaPistes.addPista(P6);
+            Pista P7  = new Pista("P7",  "Verda",    1.2f, "Primavera", "Oberta");  llistaPistes.addPista(P7);
+            Pista P8  = new Pista("P8",  "Verda",    0.9f, "Pols",      "Oberta");  llistaPistes.addPista(P8);
+
+            P1.afegirDependencia(RM1);
+            P2.afegirDependencia(RM2); P2.afegirDependencia(RM3);
+            P3.afegirDependencia(RM5);
+            P4.afegirDependencia(RM5);
+            P5.afegirDependencia(RM5);
+            P6.afegirDependencia(RM4);
+            P7.afegirDependencia(RM5);
+            P8.afegirDependencia(RM5); P8.afegirDependencia(RM6);
+            
+        } else if(this.getNom().equals("Sud")) {
+            Teleesqui  RM7 = new Teleesqui ("RM7", "En Servei", 60, false);       llistaRemuntadors.afegirRemuntador(RM7);
+            Telecadira RM8 = new Telecadira("RM8", "En Servei", 60, false);       llistaRemuntadors.afegirRemuntador(RM8);
+            Telecabina RM9 = new Telecabina("RM9", "Fora de Servei", 60, true);   llistaRemuntadors.afegirRemuntador(RM9);
+            Teleferic RM10 = new Teleferic ("RM10", "En Servei", 60, false); llistaRemuntadors.afegirRemuntador(RM10);
+        
+            Pista P9  = new Pista("P9",  "Vermella", 2.1f, "Dura",      "Tancada");  llistaPistes.addPista(P9);
+            Pista P10 = new Pista("P10", "Negra",    0.6f, "Primavera", "Tancada");  llistaPistes.addPista(P10);
+            Pista P11 = new Pista("P11", "Vermella", 1.3f, "Primavera", "Oberta");  llistaPistes.addPista(P11);
+            Pista P12 = new Pista("P12", "Blava",    1.9f, "Pols",      "Oberta");  llistaPistes.addPista(P12);
+            
+            P9.afegirDependencia(RM9);
+            P10.afegirDependencia(RM9);
+            P11.afegirDependencia(RM7); P11.afegirDependencia(RM9);
+            P12.afegirDependencia(RM8);
+        } 
+        
+    }
