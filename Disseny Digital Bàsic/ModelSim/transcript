@@ -1,0 +1,24 @@
+# Compile of P3_Pedragosa_Lozano_Javier.vhd was successful.
+# Compile of P3_Pedragosa_Lozano_Javier.vhd was successful.
+vsim -gui work.bdp_biestables
+# vsim -gui work.bdp_biestables 
+# Start time: 20:16:16 on Nov 15,2021
+# Loading std.standard
+# Loading work.bdp_biestables(test_biestables)
+# Loading work.d_ff(ifthen)
+# Loading work.d_latch(ifthen)
+# Loading work.jk_ff(ifthen)
+# Loading work.jk_latch(ifthen)
+# Loading work.t_ff(ifthen)
+# Loading work.t_latch(ifthen)
+add wave -position end sim:/bdp_biestables/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: javis  Hostname: DESKTOP-1EKIQIL  ProcessID: 11152
+#           Attempting to use alternate WLF file "./wlft42s0ar".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft42s0ar
+run
+# Compile of P3_Pedragosa_Lozano_Javier.vhd was successful.
+# Compile of P3_Pedragosa_Lozano_Javier.vhd was successful.
+# End time: 20:26:53 on Nov 15,2021, Elapsed time: 0:10:37
+# Errors: 0, Warnings: 7

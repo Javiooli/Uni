@@ -1,0 +1,8 @@
+C:/Users/javis/ModelSim/Banc_de_proves.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/javis/ModelSim/Banc_de_proves.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Compiling entity testbench
+-- Compiling architecture senyals of testbench
+-- Loading entity inversor
+
+} {} {}}

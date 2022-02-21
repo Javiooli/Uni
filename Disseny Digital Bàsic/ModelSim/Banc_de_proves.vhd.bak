@@ -1,0 +1,25 @@
+ENTITY testbench IS
+END testbench;
+
+ARCHITECTURE senyals OF testbench IS
+	COMPONENT circuit0
+		PORT (a: IN BIT; z: OUT BIT);
+	END COMPONENT;
+-- He definit el component que fare servir de seguida.
+	SIGNAL entrada,sortida: BIT;
+-- Que volem testejar (component inversor).
+	FOR DUT: circuit0 USE ENTITY WORK.inversor(logica);
+BEGIN
+	DUT: circuit0 PORT MAP (entrada,sortida);
+PROCESS
+-- Comenca a aplicar senyals al terminal d'entrada.
+BEGIN
+entrada <= '0';
+WAIT FOR 50 ns;
+entrada <= '1';
+WAIT FOR 140 ns;
+entrada <= '0';
+WAIT FOR 70 ns;
+entrada <= '1';
+END PROCESS;
+END senyals; 

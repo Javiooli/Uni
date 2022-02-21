@@ -1,0 +1,22 @@
+C:/Users/javis/ModelSim/P5a_Pedragosa_Lozano_Javier_maquina.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/javis/ModelSim/P5a_Pedragosa_Lozano_Javier_maquina.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Compiling entity inversor
+-- Compiling architecture logicaretard of inversor
+-- Compiling entity and2
+-- Compiling architecture logicaretard of and2
+-- Compiling entity xor2
+-- Compiling architecture logicaretard of xor2
+-- Compiling entity JK_FF
+-- Compiling architecture ifthen of JK_FF
+-- Compiling entity circuit_pr05
+-- Compiling architecture estructural of circuit_pr05
+-- Loading entity xor2
+-- Loading entity inversor
+-- Loading entity and2
+-- Loading entity JK_FF
+-- Compiling entity bdp_pr05
+-- Compiling architecture test_pr05 of bdp_pr05
+-- Loading entity circuit_pr05
+
+} {} {}}

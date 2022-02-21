@@ -1,0 +1,46 @@
+C:/Users/javis/ModelSim/P3_Pedragosa_Lozano_Javier.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/javis/ModelSim/P3_Pedragosa_Lozano_Javier.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Compiling entity D_FF
+-- Compiling architecture ifthen of D_FF
+-- Compiling entity D_Latch
+-- Compiling architecture ifthen of D_Latch
+-- Compiling entity JK_FF
+-- Compiling architecture ifthen of JK_FF
+-- Compiling entity JK_Latch
+-- Compiling architecture ifthen of JK_Latch
+-- Compiling entity T_FF
+-- Compiling architecture ifthen of T_FF
+-- Compiling entity T_Latch
+-- Compiling architecture ifthen of T_Latch
+-- Compiling entity bdp_biestables
+-- Compiling architecture test_biestables of bdp_biestables
+-- Loading entity D_FF
+-- Loading entity D_Latch
+-- Loading entity JK_FF
+-- Loading entity JK_Latch
+-- Loading entity T_FF
+-- Loading entity T_Latch
+
+} {} {}} C:/Users/javis/ModelSim/P2b_Pedragosa_Lozano_Javier_funcio.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/javis/ModelSim/P2b_Pedragosa_Lozano_Javier_funcio.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Compiling entity funcio_2
+-- Compiling architecture logica of funcio_2
+-- Compiling architecture logicaretard of funcio_2
+-- Loading entity funcio_2
+-- Compiling architecture estructural of funcio_2
+-- Loading entity funcio_2
+-- Loading entity inversor
+-- Loading entity and2
+-- Loading entity and3
+-- Loading entity or2
+-- Loading entity or4
+-- Loading entity xor2
+-- Compiling architecture estructural_R of funcio_2
+-- Loading entity funcio_2
+-- Compiling entity bdp
+-- Compiling architecture test of bdp
+-- Loading entity funcio_2
+
+} {} {}}
