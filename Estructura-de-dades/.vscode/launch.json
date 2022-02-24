@@ -9,9 +9,9 @@
         ""
       ],
       "stopAtEntry": false,
-      "cwd": "c:/Users/javis/Documents/Uni/Estructura-de-dades/Problemes/Ex 1",
+      "cwd": "c:/Users/javis/Documents/Uni/Estructura-de-dades/Pràctica 1/Exercici 3",
       "environment": [],
-      "program": "c:/Users/javis/Documents/Uni/Estructura-de-dades/Problemes/Ex 1/build/Debug/outDebug",
+      "program": "c:/Users/javis/Documents/Uni/Estructura-de-dades/Pràctica 1/Exercici 3/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
