@@ -1,7 +1,7 @@
 //@Author: Javier Pedragosa
 #include <iostream>
 #include <Vector>
-#include <Estudiant.cpp>
+#include "Estudiant.cpp"
 
 using namespace std;
 
@@ -76,3 +76,4 @@ int main(){
 
     } while (option != 1);
 }
+
