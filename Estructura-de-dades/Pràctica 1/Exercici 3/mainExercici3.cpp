@@ -1,6 +1,7 @@
 //@Author: Javier Pedragosa
 #include <iostream>
 #include <Vector>
+#include <stdexcept>
 #include "Estudiant.cpp"
 
 using namespace std;
@@ -19,19 +20,29 @@ bool imprimirMenu(vector<string> arr_options){
     return true;
 }
 
-void seleccio(vector<string> arr_options, int& option){
-    while (imprimirMenu(arr_options) && (!(cin >> option) || option < 1 || option > arr_options.size())) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        std::cout << "Opcio no valida, escull un nombre d'entre les opcions." << endl;
+void comprovar(int& entrada, int min, int max) {
+    if (!(cin >> entrada) || cin.fail() || entrada < min || entrada > max) {
+        netejarCin();
+        throw std::invalid_argument("Entrada no valida.");
+    }
+}
+
+void seleccio(int& entrada) {
+    try {
+        imprimirMenu(arr_options);
+        comprovar(entrada, 1, arr_options.size());
+    } catch (const std::invalid_argument& ex) {
+        cout << endl << ex.what() <<  " Escull un nombre d'entre les opcions." << endl;
+        seleccio(entrada);
     }
 }
 
 void introduirNum(int& option){
-    netejarCin();
-    while (!(cin >> option) || option < 0) {
-        netejarCin();
-        std::cout << "Entrada no valida, introdueix un nombre positiu." << endl;
+    try {
+        comprovar(option, 1, 2022);
+    } catch (const std::invalid_argument& ex) {
+        cout << endl << ex.what() << " Introdueix un nombre positiu." << endl;
+        introduirNum(option);
     }
 }
 
@@ -59,7 +70,7 @@ int main(){
     do {
         cout << "Hola, que vols fer?" << endl;
         
-        seleccio(arr_options, option);
+        seleccio(option);
 
 
         switch(option){

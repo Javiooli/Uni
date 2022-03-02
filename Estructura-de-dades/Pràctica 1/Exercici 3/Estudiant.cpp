@@ -15,7 +15,7 @@ Estudiant::Estudiant(std::string nom, int any_naixement, int assignatures)
 
 void Estudiant::print()
 {
-    cout << "Estudiant(Nom ==> " << this->nom << ", Naixement ==> " <<
+    cout << "\nEstudiant(Nom ==> " << this->nom << ", Naixement ==> " <<
     this->any_naixement << ", Assignatures ==> " << this->assignatures << ')' << endl;
 }
 
