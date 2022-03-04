@@ -2,12 +2,14 @@
 #include <iostream>
 #include <Vector>
 #include <stdexcept>
+#include <fstream>
+#include <filesystem>
 #include "Estudiant.cpp"
 #include "Professor.cpp"
 
 using namespace std;
 
-vector<string> arr_options = {"Sortir", "Afegir persona", "Resum persones"};
+vector<string> arr_options = {"Sortir", "Afegir persona", "Llegir fitxer", "Resum persones"};
 
 void netejarCin() {
     cin.clear();
@@ -109,6 +111,58 @@ void afegirPersona(int& comptador_estudiants, int& comptador_professors) {
     }
 }
 
+void seleccionarArxiu(string& ruta){
+    cout << "Ruta arxiu: ";
+    cin >> ruta;
+    if (ruta[ruta.length() - 1] != 't' || ruta[ruta.length() - 2] != 'x' || ruta[ruta.length() - 3] != 't' || ruta[ruta.length() - 4] != '.') {
+        ruta.append(".txt");
+    }
+    cout << "Processant " << ruta << "...\n";
+    
+    try {
+        ifstream arxiu(ruta);
+        if (!filesystem::exists(ruta)) throw std::runtime_error("No es troba l'arxiu.");
+    } catch (const std::runtime_error& ex) {
+        cout << ex.what() << "\n\n";
+        seleccionarArxiu(ruta);
+    }
+
+}
+
+void llegirFitxer(int& comptador_estudiants, int& comptador_professors) {
+    string ruta;
+    Estudiant estudiant;
+    Professor professor;
+    char tipus;
+    string nom;
+    int any, assignatures;
+
+    seleccionarArxiu(ruta);
+    ifstream meu_fitxer(ruta);
+
+    while (!meu_fitxer.eof()) {
+        meu_fitxer >> tipus;
+        meu_fitxer >> nom;
+        meu_fitxer >> any;
+
+        if (tipus == 'E') {
+            comptador_estudiants++;
+            meu_fitxer >> assignatures;
+            estudiant.setNom(nom);
+            estudiant.setAnyNaixement(any);
+            estudiant.setAssignatures(assignatures);
+            estudiant.print();
+        } else {
+            comptador_professors++;
+            professor.setNom(nom);
+            professor.setAnyNaixement(any);
+            professor.print();
+        }
+    }
+    meu_fitxer.close();
+    cout << endl;
+}
+
 int main(){
     int comptador_estudiants = 0;
     int comptador_professors = 0;
@@ -128,6 +182,9 @@ int main(){
                 afegirPersona(comptador_estudiants, comptador_professors);
                 break;
             case 3:
+                llegirFitxer(comptador_estudiants, comptador_professors);
+                break;
+            case 4:
                 cout << "Estudiants creats: " << comptador_estudiants << ", professors creats: " << comptador_professors << ".\n\n";
                 break;
             default:
