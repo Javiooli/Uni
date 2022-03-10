@@ -1,5 +1,5 @@
-#ifndef CUAESTATICA.H
-#define CUAESTATICA.H
+#ifndef CUAESTATICA
+#define CUAESTATICA
 
 class CuaEstatica {
     public:
@@ -10,7 +10,7 @@ class CuaEstatica {
         bool isFull();
         bool isEmpty();
         void print();
-        const int getFront();
+        int getFront();
 
         void printFrontRear();
 
