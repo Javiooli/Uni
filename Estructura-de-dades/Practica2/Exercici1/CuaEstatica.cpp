@@ -20,7 +20,7 @@ CuaEstatica::~CuaEstatica() {
 
 void CuaEstatica::enqueue(const int key) {
     if (isFull()) throw std::out_of_range("EXCEPTION: L'estructura esta plena.");
-    _front = ++_front % _max_size;
+    if (!isEmpty()) _front = ++_front % _max_size;
     _data[_front] = key;
     _size++;
     cout << "Element " << _data[_front] << " agregat" << "\n\n";
@@ -29,7 +29,7 @@ void CuaEstatica::enqueue(const int key) {
 void CuaEstatica::dequeue() {
     if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
     cout << "Element " << _data[_rear] << " eliminat" << "\n\n";
-    _rear = --_rear % _max_size;
+    _rear = ++_rear % _max_size;
     _size--;
 }
 
@@ -46,8 +46,8 @@ bool CuaEstatica::isEmpty() {
 void CuaEstatica::print() {
     if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
     cout << '[';
-    for (int i = _rear; i < _size; i ) {
-        cout << _data[i] << (i != _size - 1 ? ", " : "]\n\n");
+    for (int i = 0; i < _size; i++) {
+        cout << _data[(i + _rear) % _max_size] << (i != _size - 1 ? ", " : "]\n\n");
     }
 }
 
