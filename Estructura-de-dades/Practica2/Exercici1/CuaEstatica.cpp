@@ -20,17 +20,21 @@ CuaEstatica::~CuaEstatica() {
 
 void CuaEstatica::enqueue(const int key) {
     if (isFull()) throw std::out_of_range("EXCEPTION: L'estructura esta plena.");
-    if (!isEmpty()) _front = ++_front % _max_size;
-    _data[_front] = key;
-    _size++;
-    cout << "Element " << _data[_front] << " agregat" << "\n\n";
+    else {
+        _data[_rear] = key;
+        cout << "Element " << _data[_rear] << " agregat" << "\n\n";
+        _rear = ++_rear % _max_size;
+        _size++;
+    }
 }
 
 void CuaEstatica::dequeue() {
     if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
-    cout << "Element " << _data[_rear] << " eliminat" << "\n\n";
-    _rear = ++_rear % _max_size;
-    _size--;
+    else {
+        cout << "Element " << _data[_front] << " eliminat" << "\n\n";
+        _front = ++_front % _max_size;
+        _size--;
+    }
 }
 
 bool CuaEstatica::isFull() {
@@ -44,11 +48,13 @@ bool CuaEstatica::isEmpty() {
 }
 
 void CuaEstatica::print() {
-    if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
+    //Comentat per que els couts dels casos de prova coincideixin amb les sortides esperades de l'enunciat.
+    //if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
     cout << '[';
     for (int i = 0; i < _size; i++) {
-        cout << _data[(i + _rear) % _max_size] << (i != _size - 1 ? ", " : "]\n\n");
+        cout << _data[(i + _front) % _max_size] << (i != _size - 1 ? ", " : "");
     }
+    cout << "]\n\n";
 }
 
 int CuaEstatica::getFront() {
@@ -57,6 +63,7 @@ int CuaEstatica::getFront() {
 }
 
 void CuaEstatica::printFrontRear() {
-    if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
+    //Comentat per que els couts dels casos de prova coincideixin amb les sortides esperades de l'enunciat.
+    //if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
     cout << "Front: " << _front << ", Rear: " << _rear << "\n\n";
 }
