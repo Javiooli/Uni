@@ -141,6 +141,7 @@ void executeOption(const int& option, const bool& debug, CuaEstatica& cua) {
                     break;
                 case 6:
                     cout << "Fins aviat!" << endl;
+                    cua.~CuaEstatica();
                     break;
                 default:
                     break;
@@ -170,6 +171,7 @@ void executeOption(const int& option, const bool& debug, CuaEstatica& cua) {
                     break;
                 case 8:
                     cout << "Fins aviat!" << endl;
+                    cua.~CuaEstatica();
                     break;
                 default:
                     break;
