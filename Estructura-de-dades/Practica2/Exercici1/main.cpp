@@ -58,7 +58,7 @@ CuaEstatica crearCua(bool& debug) {
     int input;
     string _debug;
     while (!correcte) {
-        cout << "Introdueix el tamany desitjat per a la cua o 'debug' per entrar al mode debug: ";
+        cout << "Introdueix el tamany desitjat per la cua o 'debug' per entrar al mode debug: ";
         cin >> _debug;
         try {
             input = stoi(_debug);
@@ -124,57 +124,57 @@ void casDeProva_2() {
 void executeOption(const int& option, const bool& debug, CuaEstatica& cua) {
     if (!debug) {
         switch (option) {
-                case 1:
-                    cua.enqueue(selectInt());
-                    break;
-                case 2:
-                    cua.dequeue();
-                    break;
-                case 3:
-                    cout << cua.getFront() << endl;
-                    break;
-                case 4:
-                    cua.print();
-                    break;
-                case 5:
-                    cua.printFrontRear();
-                    break;
-                case 6:
-                    cout << "Fins aviat!" << endl;
-                    cua.~CuaEstatica();
-                    break;
-                default:
-                    break;
+            case 1:
+                cua.enqueue(selectInt());
+                break;
+            case 2:
+                cua.dequeue();
+                break;
+            case 3:
+                cout << cua.getFront() << endl;
+                break;
+            case 4:
+                cua.print();
+                break;
+            case 5:
+                cua.printFrontRear();
+                break;
+            case 6:
+                cout << "Fins aviat!" << endl;
+                cua.~CuaEstatica();
+                break;
+            default:
+                break;
         }
     } else {
         switch (option) {
-                case 1:
-                    cua.enqueue(selectInt());
-                    break;
-                case 2:
-                    cua.dequeue();
-                    break;
-                case 3:
-                    cout << cua.getFront() << endl;
-                    break;
-                case 4:
-                    cua.print();
-                    break;
-                case 5:
-                    cua.printFrontRear();
-                    break;
-                case 6:
-                    casDeProva_1();
-                    break;
-                case 7:
-                    casDeProva_2();
-                    break;
-                case 8:
-                    cout << "Fins aviat!" << endl;
-                    cua.~CuaEstatica();
-                    break;
-                default:
-                    break;
+            case 1:
+                cua.enqueue(selectInt());
+                break;
+            case 2:
+                cua.dequeue();
+                break;
+            case 3:
+                cout << cua.getFront() << endl;
+                break;
+            case 4:
+                cua.print();
+                break;
+            case 5:
+                cua.printFrontRear();
+                break;
+            case 6:
+                casDeProva_1();
+                break;
+            case 7:
+                casDeProva_2();
+                break;
+            case 8:
+                cout << "Fins aviat!" << endl;
+                cua.~CuaEstatica();
+                break;
+            default:
+                break;
         }
     }
 }
