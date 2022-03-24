@@ -26,5 +26,10 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+    "stdexcept": "cpp",
+    "ostream": "cpp",
+    "iostream": "cpp"
+  }
 }

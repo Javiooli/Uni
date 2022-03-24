@@ -26,13 +26,8 @@ void printMenu(const bool& debug) {
 }
 
 void selectOption(int& option, const bool& debug) {
-    if (!debug) {
-        if (!(cin >> option) || cin.fail() || option < 0 || option > menu.size()) 
-            throw std::invalid_argument("EXCEPTION: Argument no valid.");
-    } else {
-        if (!(cin >> option) || cin.fail() || option < 0 || option > debugMenu.size()) 
-            throw std::invalid_argument("EXCEPTION: Argument no valid.");
-    }
+    if (!(cin >> option) || cin.fail() || option < 0 || option > (debug ? debugMenu.size() : menu.size()))
+        throw std::invalid_argument("EXCEPTION: Argument no valid.");
 }
 
 int selectInt() {
@@ -44,10 +39,10 @@ int selectInt() {
 }
 
 bool iequals(const string& a, const string& b) {
-    unsigned int sz = a.size();
-    if (b.size() != sz)
+    int size = a.size();
+    if (b.size() != size)
         return false;
-    for (unsigned int i = 0; i < sz; ++i)
+    for (int i = 0; i < size; ++i)
         if (tolower(a[i]) != tolower(b[i]))
             return false;
     return true;
@@ -131,7 +126,7 @@ void executeOption(const int& option, const bool& debug, CuaEstatica& cua) {
                 cua.dequeue();
                 break;
             case 3:
-                cout << cua.getFront() << endl;
+                cout << "El primer element de la cua es: " << cua.getFront() << "\n\n";
                 break;
             case 4:
                 cua.print();
@@ -155,7 +150,7 @@ void executeOption(const int& option, const bool& debug, CuaEstatica& cua) {
                 cua.dequeue();
                 break;
             case 3:
-                cout << cua.getFront() << endl;
+                cout << "El primer element de la cua es: " << cua.getFront() << "\n\n";
                 break;
             case 4:
                 cua.print();

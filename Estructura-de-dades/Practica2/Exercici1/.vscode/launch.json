@@ -5,13 +5,11 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [
-        ""
-      ],
+      "args": [],
       "stopAtEntry": false,
-      "cwd": "c:/Users/javis/Documents/Uni/Estructura-de-dades/Practica2/Exercici1",
+      "cwd": "c:/Users/javis/Documents/GitHub/Uni/Estructura-de-dades/Practica2/Exercici1",
       "environment": [],
-      "program": "c:/Users/javis/Documents/Uni/Estructura-de-dades/Practica2/Exercici1/build/Debug/outDebug",
+      "program": "c:/Users/javis/Documents/GitHub/Uni/Estructura-de-dades/Practica2/Exercici1/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/MinGW/bin/gdb.exe",

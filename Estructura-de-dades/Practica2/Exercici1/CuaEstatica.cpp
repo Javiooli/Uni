@@ -11,7 +11,7 @@ CuaEstatica::CuaEstatica(const int max_size) {
     _size = 0;
     _front = 0;
     _rear = 0;
-    cout << "Estructura creada." << "\n\n";
+    cout << "Estructura creada.\n\n";
 }
 
 CuaEstatica::~CuaEstatica() {
@@ -22,7 +22,7 @@ void CuaEstatica::enqueue(const int key) {
     if (isFull()) throw std::out_of_range("EXCEPTION: L'estructura esta plena.");
     else {
         _data[_rear] = key;
-        cout << "Element " << _data[_rear] << " agregat." << "\n\n";
+        cout << "Element " << _data[_rear] << " agregat.\n\n";
         _rear = ++_rear % _max_size;
         _size++;
     }
@@ -52,9 +52,8 @@ void CuaEstatica::print() {
     //if (isEmpty()) throw std::out_of_range("EXCEPTION: L'estructura esta buida");
     cout << '[';
     for (int i = 0; i < _size; i++) {
-        cout << _data[(i + _front) % _max_size] << (i != _size - 1 ? ", " : "");
+        cout << _data[(i + _front) % _max_size] << (i != _size - 1 ? ", " : "]\n\n");
     }
-    cout << "]\n\n";
 }
 
 int CuaEstatica::getFront() {
