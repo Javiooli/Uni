@@ -4,6 +4,8 @@
 #include "CuaEncadenada.h"
 #include "Node.h"
 
+// En executar-lo, entrar "debug" a la consola per desbloquejar els dos casos de prova.
+
 using namespace std;
 
 vector<string> MENU = {"Inserir element a la cua", "Treure element de la cua", "Consultar el primer element",
@@ -14,15 +16,15 @@ vector<string> DEBUG_MENU = {"Inserir element a la cua", "Treure element de la c
 
 // Imprimeix el menu MENU si el mode debug no esta activat, i el menu DEBUG_MENU si el mode debug esta activat.
 // A mes, recorda sovint com activar o desactivar el mode debug.
-void printMenu(const bool& debug, int& a) {
-    a = ++a % 5;
+void printMenu(const bool& debug, int& turns) {
+    turns = ++turns % 5;
     if (!debug) {
-        if (a == 3) cout << "(Entra debug per entrar al mode debug.)\n\n";
+        if (turns == 3) cout << "(Entra debug per entrar al mode debug.)\n\n";
         for (int i = 0; i < MENU.size(); i++) {
             cout << i + 1 << ". " << MENU[i] << endl;
         }
     } else {
-        if (a == 3) cout << "(Entra out per sortir del mode debug.)\n\n";
+        if (turns == 3) cout << "(Entra out per sortir del mode debug.)\n\n";
         cout << "=========================\n          DEBUG          \n=========================" << endl;
         for (int i = 0; i < DEBUG_MENU.size(); i++) {
             cout << i + 1 << ". " << DEBUG_MENU[i] << endl;
@@ -55,7 +57,6 @@ void selectOption(int& option, bool& debug) {
         if (iequals(ent, "debug")) debug = true;
         else if (iequals(ent, "out")) debug = false;
         else throw std::invalid_argument("EXCEPTION: Argument no valid.");
-        cout << "\n\n";
     }
 }
 
@@ -93,8 +94,12 @@ void casDeProva_2(CuaEncadenada<T>& cua) {
     cout << "El primer element de la cua es: " << cua.getFront() << "\n\n";
     cua.dequeue();
     cua.dequeue();
-    cua.dequeue();
-    cua.print();
+    try {
+        cua.dequeue();
+    } catch (const exception& e) {
+        cout << e.what() << "\n\n";
+        cua.print();
+    }
 }
 
 // Executa la accio pertinent depenent de la opcio que s'hagi escollit i si el mode debug esta activat.
@@ -152,12 +157,12 @@ void executeOption(const int& option, const bool& debug, CuaEncadenada<T>& cua) 
 // main
 int main(){
     bool debug = false;
-    int option = 0, exitOption = 5, a = 0;
+    int option = 0, exitOption = 5, turns = 0; // Turns mesura la quantitat de vegades que l'usuari passa pel menu per imprimir el missatge sobre el debug.
     CuaEncadenada<int> cua;
 
     do {
         try {
-            printMenu(debug, a);                // Imprimir menu
+            printMenu(debug, turns);                // Imprimir menu
             selectOption(option, debug);        // Escollir opcio
             exitOption = (debug ? 7 : 5);       // Canviar numero opcio sortir segons si debug esta activat o no
             executeOption(option, debug, cua);  // Executar opcio escollida
