@@ -85,11 +85,11 @@ void CuaEncadenada<T>::dequeue() {
 
     cout << "Element " << realFront->getElement() << " eliminat.\n\n";
 
-    if (realFront->getNext() == nullptr) {
-        this->_front->setNext(nullptr);
+    this->_front->setNext(realFront->getNext());
+
+    if (this->_front->getNext() == nullptr) {
         this->_rear = _front;
     }
-    this->_front->setNext(realFront->getNext());
 }
 
 // Retorna el primer element de la cua sense comptar el sentinella.
