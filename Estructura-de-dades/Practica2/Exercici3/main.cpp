@@ -20,17 +20,6 @@ void printMenu() {
     
 }
 
-// Compara strings caracter a caracter convertint-los a minuscula per fer un equals ignorant majuscules.
-bool iequals(const string& a, const string& b) {
-    int size = a.size();
-    if (b.size() != size)
-        return false;
-    for (int i = 0; i < size; ++i)
-        if (tolower(a[i]) != tolower(b[i]))
-            return false;
-    return true;
-}
-
 // Fa que l'usuari pugui escollir les opcions del menu.
 void selectOption(int& option) {
     string ent;
@@ -56,8 +45,9 @@ template <class T>
 void inserirEntrades(CuaEncadenada<T>& cua) {
     string entrada, taula, plat, hora;
     bool correcte = false;
-    int exit = -1, quant;
+    int exit = -1, quant, iter = 0;
     while (exit != 0) {
+        iter++;
         while (!correcte) {
             cout << "Entra numero de taula per inserir una nova entrada o 0 per sortir: ";
             cin >> entrada;
@@ -118,12 +108,14 @@ void inserirEntrades(CuaEncadenada<T>& cua) {
         cua.enqueue(com);
         correcte = false;
     }
+
+    cout << iter << " comandes afegides.\n\n";
 }
 
 template <class T>
 void emplenarCuaDeFitxer(CuaEncadenada<T>& cua) {
     string nomFitxer, linia, taula, plat, quantitat, hora, sbstr;
-    int numAtribut = 0;
+    int numAtribut = 0, iter = 0;
     cout << "Introdueix el nom del fitxer: ";
     cin >> nomFitxer;
     if (nomFitxer[nomFitxer.length() - 4] != '.' || nomFitxer[nomFitxer.length() - 3] != 't' ||
@@ -133,7 +125,9 @@ void emplenarCuaDeFitxer(CuaEncadenada<T>& cua) {
     
     ifstream fitxer(nomFitxer);
     if (fitxer.is_open()) {
+        cout << endl;
         while (getline(fitxer, linia)) {
+            iter++;
             for (char c : linia) {
                 if (c == ',') {
                     switch (numAtribut) {
@@ -165,6 +159,9 @@ void emplenarCuaDeFitxer(CuaEncadenada<T>& cua) {
             hora = "";
             cua.enqueue(com);
         }
+        cout << iter << " comandes afegides.\n\n";
+    } else {
+        cout << "EXCEPTION: Fitxer no trobat.\n\n";
     }
 }
 

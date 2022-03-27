@@ -57,7 +57,7 @@ bool CuaEncadenada<T>::isEmpty() const {
     return (this->_front->getNext() == nullptr);
 }
 
-// Imprimeix el contingut de la cua.
+// Imprimeix el contingut de la cua en forma de taula.
 template <class T>
 void CuaEncadenada<T>::print() const {
     char separator = ' ';
@@ -68,12 +68,15 @@ void CuaEncadenada<T>::print() const {
     cout << left << setw(10) << setfill(separator) << "Taula";
     cout << left << setw(30) << setfill(separator) << "Plat";
     cout << left << setw(15) << setfill(separator) << "Quant.";
-    cout << left << setw(5) << setfill(separator) << "Hora";
+    cout << left << setw(5)  << setfill(separator) << "Hora";
     cout << endl;
     cout << left << setw(65) << setfill('-') << "";
     cout << endl;
+
     while (temp != nullptr) {
+
         line = temp->getElement().toString();
+
         for (char c : line) {
             if (c == ',') {
                 switch (numAtribut) {
@@ -92,21 +95,21 @@ void CuaEncadenada<T>::print() const {
 
             } else {
                 
-                if (numAtribut == 3)
-                    hora += c;
-                else
+                if (numAtribut != 3)
                     sbstr += c;
+                else
+                    hora += c;
 
             }
         }
 
-        cout << left << setw(5) << setfill(separator) << taula;
-        cout << left << setw(5) << setfill(separator) << "|";
+        cout << left << setw(5)  << setfill(separator) << taula;
+        cout << left << setw(5)  << setfill(separator) << "|";
         cout << left << setw(25) << setfill(separator) << plat;
-        cout << left << setw(5) << setfill(separator) << "|";
+        cout << left << setw(5)  << setfill(separator) << "|";
         cout << left << setw(10) << setfill(separator) << quantitat;
-        cout << left << setw(5) << setfill(separator) << "|";
-        cout << left << setw(5) << setfill(separator) << hora;
+        cout << left << setw(5)  << setfill(separator) << "|";
+        cout << left << setw(5)  << setfill(separator) << hora;
         cout << endl;
 
         hora = "";
