@@ -2,6 +2,8 @@
 #define CuaEncadenada_H
 
 #include "Node.h"
+#include "Comanda.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -58,13 +60,62 @@ bool CuaEncadenada<T>::isEmpty() const {
 // Imprimeix el contingut de la cua.
 template <class T>
 void CuaEncadenada<T>::print() const {
-    cout << '[';
+    char separator = ' ';
+    cout << endl;
+    string line, sbstr, taula, plat, quantitat, hora;
+    int numAtribut = 0;
     Node<T>* temp = this->_front->getNext();
+    cout << left << setw(10) << setfill(separator) << "Taula";
+    cout << left << setw(30) << setfill(separator) << "Plat";
+    cout << left << setw(15) << setfill(separator) << "Quant.";
+    cout << left << setw(5) << setfill(separator) << "Hora";
+    cout << endl;
+    cout << left << setw(65) << setfill('-') << "";
+    cout << endl;
     while (temp != nullptr) {
-        cout << temp->getElement() << (temp->getNext() == nullptr ? "" : ", ");
+        line = temp->getElement().toString();
+        for (char c : line) {
+            if (c == ',') {
+                switch (numAtribut) {
+                    case 0:
+                        taula = sbstr.substr(2);
+                        break;
+                    case 1:
+                        plat = sbstr;
+                        break;
+                    case 2:
+                        quantitat = sbstr;
+                        break;
+                }
+                sbstr = "";
+                numAtribut++;
+
+            } else {
+                
+                if (numAtribut == 3)
+                    hora += c;
+                else
+                    sbstr += c;
+
+            }
+        }
+
+        cout << left << setw(5) << setfill(separator) << taula;
+        cout << left << setw(5) << setfill(separator) << "|";
+        cout << left << setw(25) << setfill(separator) << plat;
+        cout << left << setw(5) << setfill(separator) << "|";
+        cout << left << setw(10) << setfill(separator) << quantitat;
+        cout << left << setw(5) << setfill(separator) << "|";
+        cout << left << setw(5) << setfill(separator) << hora;
+        cout << endl;
+
+        hora = "";
+        sbstr = "";
+        numAtribut = 0;
         temp = temp->getNext();
+
     }
-    cout << "]\n\n";
+    cout << "\n\n";
 }
 
 // Afegeix un element al final de la cua modificant el punter _next del que era l'ultim node de la cua i el _rear.
@@ -73,7 +124,7 @@ void CuaEncadenada<T>::enqueue(const T key) {
     Node<T>* elem = new Node(key);
     this->_rear->setNext(elem);
     this->_rear = elem;
-    cout << "Element " << key << " agregat.\n\n";
+    cout << "Comanda afegida.\n\n";
 }
 
 // Elimina el primer element de la cua modificant el _next del sentinella.
@@ -83,7 +134,7 @@ void CuaEncadenada<T>::dequeue() {
 
     Node<T>* realFront = this->_front->getNext();
 
-    cout << "Element " << realFront->getElement() << " eliminat.\n\n";
+    cout << "Comanda eliminada.\n\n";
 
     this->_front->setNext(realFront->getNext());
 

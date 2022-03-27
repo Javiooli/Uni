@@ -1,5 +1,6 @@
 #ifndef Node_H
 #define Node_H
+#include "Comanda.h"
 
 template <class T>
 class Node {

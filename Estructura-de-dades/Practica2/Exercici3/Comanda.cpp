@@ -1,33 +1,25 @@
 #include "Comanda.h"
 
-
 using namespace std;
 Comanda::Comanda() {
-
+    this->_taula = "null";
+    this->_plat = "null";
+    this->_quantitat = 0;
+    this->_hora = "null";
 }
 
-Comanda::Comanda(string taula, string plat, int quantitat, int hora, int minut) {
+Comanda::Comanda(string taula, string plat, int quantitat, string hora) {
     if (taula[0] == 'i' && taula[1] == 'd') this->_taula = taula;
     else this ->_taula = "id" + taula;
 
     this->_plat = plat;
     this->_quantitat = quantitat;
     
-    if (hora < 24 && hora >= 0) this->_hora = hora;
-    else this->_hora = 0;
-
-    if (minut <= 60 && minut >= 0) this->_minut = minut;
-    else this->_minut = 0;
+    this->_hora = hora;
 }
 
-const string Comanda::toString() const {
+std::string Comanda::toString() const {
     string comanda;
-    comanda = _taula + ',' + _plat + ',' + std::to_string(_quantitat) + ',' + std::to_string(_hora) + ':' + std::to_string(_minut) + '\n';
+    comanda = _taula + ',' + _plat + ',' + std::to_string(_quantitat) + ',' + _hora;
     return comanda;
 }
-
-std::ostream& operator<<(std::ostream& os, const Comanda& obj){
-    os << obj.toString();
-    return os;
-}
-
