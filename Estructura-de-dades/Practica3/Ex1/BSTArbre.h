@@ -30,13 +30,13 @@ class BSTArbre {
     protected:
         BSTNode<K, V>* search(const K& key) const;
         BSTNode<K, V>* root;
+    private:
+        int _size;
         void auxPreorder(const BSTNode<K, V>* node) const;
         void auxInorder(const BSTNode<K, V>* node) const;
         void auxPostorder(const BSTNode<K, V>* node) const;
         void auxSecondLargestKey(const BSTNode<K, V>* node, int& x) const;
         int auxMirrorTree(BSTNode<K, V>* node);
-    private:
-        int _size;
 };//BSTArbre
 
 template <class K, class V>

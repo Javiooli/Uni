@@ -1,6 +1,8 @@
 #ifndef FoodPackage_H
 #define FoodPackage_H
 
+//@Author: Javier Pedragosa
+
 #include <string>
 
 using namespace std;
