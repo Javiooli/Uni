@@ -10,8 +10,19 @@ using namespace std;
 class FoodPackage {
 
     public:
-        FoodPackage(string time, string id, int am, float pr);
-        FoodPackage(const FoodPackage& other);
+        FoodPackage(string time, string id, int am, float pr) {
+            this->date_time = time;
+            this->product_id = id;
+            this->amount = am;
+            this->price = pr;
+        }
+
+        FoodPackage(const FoodPackage& other) {
+            this->date_time = other.date_time;
+            this->product_id = other.product_id;
+            this->amount = other.amount;
+            this->price = other.price;
+        }
 
         string getDate_time() { return this->date_time; }
         void setDate_time(string date_time) { this->date_time = date_time; }

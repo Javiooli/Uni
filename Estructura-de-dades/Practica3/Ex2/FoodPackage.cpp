@@ -5,20 +5,6 @@
 
 using namespace std;
 
-FoodPackage::FoodPackage(string time, string id, int am, float pr) {
-    this->date_time = time;
-    this->product_id = id;
-    this->amount = am;
-    this->price = pr;
-}
-
-FoodPackage::FoodPackage(const FoodPackage& other) {
-    this->date_time = other.date_time;
-    this->product_id = other.product_id;
-    this->amount = other.amount;
-    this->price = other.price;
-}
-
 void FoodPackage::print() {
     cout << "(" << toString(", ") << ")" << endl;
 }

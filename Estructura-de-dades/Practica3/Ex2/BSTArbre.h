@@ -89,40 +89,48 @@ BSTNode<K, V>* BSTArbre<K, V>::insert(const K& k, const V& v) {
         BSTNode<K, V>* node = new BSTNode<K, V>(k);
         node->insertValue(v);
         while (!nodeSet) {
+            //Si la key de ptr es igual a la entrada, afegim valor
+            if (ptr->getKey() == k) {
+                ptr->insertValue(v);
+                nodeSet = true;
+            }
             //Si ptr te dos fills, escollir esquerre si la seva key es major que la del parametre, dreta si no
-            if (ptr->hasLeft() && ptr->hasRight()) {
-                if (ptr->getLeft()->getKey() > node->getKey()) ptr = ptr->getLeft();
+            else if (ptr->hasLeft() && ptr->hasRight()) {
+                if (ptr->getLeft()->getKey() >= node->getKey()) ptr = ptr->getLeft();
                 else ptr = ptr->getRight();
 
             // Si nomes en te un
             } else {
                 //Si te esquerre i la seva key es major que la del parametre, ptr passa a ser l'esquerre
-                if (ptr->hasLeft() && ptr->getLeft()->getKey() > node->getKey()) {
+                if (ptr->hasLeft() && ptr->getLeft()->getKey() >= node->getKey()) {
                     ptr = ptr->getLeft();
                 
                 //Si te esquerre pero es menor o igual: si te dret anem a la dreta i si no posem el del parametre com a fill dret
-                } else if (ptr->hasLeft() && ptr->getLeft()->getKey() <= node->getKey()) {
+                } else if (ptr->hasLeft() && ptr->getLeft()->getKey() < node->getKey()) {
                     if (ptr->hasRight()) ptr = ptr->getRight();
                     else {
                         node->setParent(ptr);
                         ptr->setRight(node);
                         nodeSet = true;
+                        _size++;
                     }
                 //Aqui sabem que no te esquerre, nomes dret o no en te fills.
                 //Si la key de ptr es menor que la del node del parametre ens centrem en la branca dreta de ptr
-                } else if (ptr->getKey() <= node->getKey()) {
+                } else if (ptr->getKey() < node->getKey()) {
                     //Si ptr te fill dret, ptr apunta a aquest fill, si no, el node del parametre es converteix en el fill dret
                     if (ptr->hasRight()) ptr = ptr->getRight();
                     else {
                         node->setParent(ptr);
                         ptr->setRight(node);
                         nodeSet = true;
+                        _size++;
                     }
                 //Ultimament, si res de l'anterior es compleix, podem fer el node del parametre el fill esquerre de ptr
                 } else {
                     node->setParent(ptr);
                     ptr->setLeft(node);
                     nodeSet = true;
+                    _size++;
                 }
             }
         }
@@ -137,7 +145,7 @@ const list<V> BSTArbre<K, V>::valuesOf(const K& key) const {
 
 template <class K, class V>
 void BSTArbre<K, V>::printPreorder() const {
-    if (empty()) cout << "L'arbre esta buit." << endl;
+    if (empty()) cout << "L'inventari esta buit." << endl;
     else {
         cout << "Preorder = ( ";
         auxPreorder(this->root);
@@ -156,11 +164,11 @@ void BSTArbre<K, V>::auxPreorder(const BSTNode<K, V>* node) const {
 
 template <class K, class V>
 void BSTArbre<K, V>::printInorder() const {
-    if (empty()) cout << "L'arbre esta buit." << endl;
+    if (empty()) cout << "L'inventari esta buit." << endl;
     else {
-        cout << "Inorder = ( ";
+        cout << "[|";
         auxInorder(this->root);
-        cout << ")" << endl;
+        cout << "]" << endl << endl;
     }
 }
 
@@ -168,7 +176,7 @@ template <class K, class V>
 void BSTArbre<K, V>::auxInorder(const BSTNode<K, V>* node) const {
     if (node != nullptr) {
         auxInorder(node->getLeft());
-        cout << node->getKey() << " ";
+        cout << ' ' << node->getKey() << " |";
         auxInorder(node->getRight());
     }
 }
@@ -177,7 +185,7 @@ template <class K, class V>
 void BSTArbre<K, V>::printPostorder() const {
     if (empty()) cout << "L'arbre esta buit." << endl;
     else {
-        cout << "Postrder = ( ";
+        cout << "Postorder = ( ";
         auxPostorder(this->root);
         cout << ")" << endl;
     }
@@ -238,7 +246,8 @@ void BSTArbre<K, V>::auxSecondLargestKey(const BSTNode<K, V>* node, int& x) cons
 template <class K, class V>
 void BSTArbre<K, V>::mirrorTree() {
     int x = auxMirrorTree(this->root);
-    cout << (x == 0 ? "Mirror arbre binari." : "L'arbre esta buit.") << endl;
+    if (x == 0) return;
+    else cout << "L'arbre esta buit." << endl;
 }
 
 template <class K, class V>

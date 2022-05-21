@@ -37,7 +37,15 @@ void selectOption(int& option) {
 
 template <class T>
 void emplenarInvDeFitxer(Inventari<T>& inv) {
+    string nomFitxer;
+    cout << "Introdueix el nom del fitxer: ";
+    cin >> nomFitxer;
+    if (nomFitxer[nomFitxer.length() - 4] != '.' || nomFitxer[nomFitxer.length() - 3] != 't' ||
+        nomFitxer[nomFitxer.length() - 2] != 'x' || nomFitxer[nomFitxer.length() - 1] != 't')
+
+        nomFitxer.append(".txt");
     
+    inv.loadFromFile(nomFitxer);
 }
 
 // Executa la accio pertinent depenent de la opcio que s'hagi escollit.
@@ -45,10 +53,13 @@ template <class T>
 void executeOption(const int& option, Inventari<T>& inv) {
     switch (option) {
         case 1:
+            emplenarInvDeFitxer(inv);
             break;
         case 2:
+            inv.printAll();
             break;
         case 3:
+            inv.printAllReverse();
             break;
         case 4:
             break;

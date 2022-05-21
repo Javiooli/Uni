@@ -90,17 +90,17 @@ BSTNode<K, V>* BSTArbre<K, V>::insert(const K& k, const V& v) {
         while (!nodeSet) {
             //Si ptr te dos fills, escollir esquerre si la seva key es major que la del parametre, dreta si no
             if (ptr->hasLeft() && ptr->hasRight()) {
-                if (ptr->getLeft()->getKey() > node->getKey()) ptr = ptr->getLeft();
+                if (ptr->getLeft()->getKey() >= node->getKey()) ptr = ptr->getLeft();
                 else ptr = ptr->getRight();
 
             // Si nomes en te un
             } else {
                 //Si te esquerre i la seva key es major que la del parametre, ptr passa a ser l'esquerre
-                if (ptr->hasLeft() && ptr->getLeft()->getKey() > node->getKey()) {
+                if (ptr->hasLeft() && ptr->getLeft()->getKey() >= node->getKey()) {
                     ptr = ptr->getLeft();
                 
                 //Si te esquerre pero es menor o igual: si te dret anem a la dreta i si no posem el del parametre com a fill dret
-                } else if (ptr->hasLeft() && ptr->getLeft()->getKey() <= node->getKey()) {
+                } else if (ptr->hasLeft() && ptr->getLeft()->getKey() < node->getKey()) {
                     if (ptr->hasRight()) ptr = ptr->getRight();
                     else {
                         node->setParent(ptr);
@@ -109,7 +109,7 @@ BSTNode<K, V>* BSTArbre<K, V>::insert(const K& k, const V& v) {
                     }
                 //Aqui sabem que no te esquerre, nomes dret o no en te fills.
                 //Si la key de ptr es menor que la del node del parametre ens centrem en la branca dreta de ptr
-                } else if (ptr->getKey() <= node->getKey()) {
+                } else if (ptr->getKey() < node->getKey()) {
                     //Si ptr te fill dret, ptr apunta a aquest fill, si no, el node del parametre es converteix en el fill dret
                     if (ptr->hasRight()) ptr = ptr->getRight();
                     else {
@@ -125,6 +125,7 @@ BSTNode<K, V>* BSTArbre<K, V>::insert(const K& k, const V& v) {
                 }
             }
         }
+        _size++;
         return node;
     }
 }
@@ -176,7 +177,7 @@ template <class K, class V>
 void BSTArbre<K, V>::printPostorder() const {
     if (empty()) cout << "L'arbre esta buit." << endl;
     else {
-        cout << "Postrder = ( ";
+        cout << "Postorder = ( ";
         auxPostorder(this->root);
         cout << ")" << endl;
     }

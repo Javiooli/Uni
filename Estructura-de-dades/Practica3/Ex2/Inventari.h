@@ -1,6 +1,8 @@
 //@Author: Javier Pedragosa
 
 #include <string>
+#include "FoodPackage.h"
+#include "BSTNode.h"
 
 using namespace std;
 
@@ -13,7 +15,7 @@ class Inventari : protected T {
         virtual ~Inventari();
         void loadFromFile(string file_path);
         void printAll() const;
-        void printAllReverse() const;
+        void printAllReverse();
         float priceInTotal() const;
         float priceInTimeInterval(pair<string, string> ival) const;
         float priceInTimeIntervalByProduct(pair<string, string> ival, string pid) const;
@@ -21,6 +23,7 @@ class Inventari : protected T {
         int height() const;
     private:
         float iva;
+        void auxPriceInTotal(const BSTNode<string, FoodPackage>* node) const;
         /* Metodes auxiliars, definiu-los aquí sota */
 };
 
@@ -48,10 +51,6 @@ template <class T>
 void Inventari<T>::loadFromFile(string file_path) {
     string linia, sbstr, date_time, product_id, amount, price;
     int numAtribut = 0, iter = 0;
-    if (file_path[file_path.length() - 4] != '.' || file_path[file_path.length() - 3] != 't' ||
-        file_path[file_path.length() - 2] != 'x' || file_path[file_path.length() - 1] != 't')
-
-        file_path.append(".txt");
     
     ifstream fitxer(file_path);
     if (fitxer.is_open()) {
@@ -89,9 +88,9 @@ void Inventari<T>::loadFromFile(string file_path) {
             numAtribut = 0;
             sbstr = "";
             price = "";
-            T::insert(FP);
+            T::insert(date_time, FP);
         }
-        cout << iter << " comandes afegides.\n\n";
+        cout << iter << " transaccions afegides.\n\n";
     } else {
         cout << "EXCEPTION: Fitxer no trobat.\n\n";
     }
@@ -99,17 +98,33 @@ void Inventari<T>::loadFromFile(string file_path) {
 
 template <class T>
 void Inventari<T>::printAll() const {
-
+    T::printInorder();
 }
 
 template <class T>
-void Inventari<T>::printAllReverse() const {
-
+void Inventari<T>::printAllReverse() {
+    T::mirrorTree();
+    T::printInorder();
+    T::mirrorTree();
 }
 
 template <class T>
 float Inventari<T>::priceInTotal() const {
+    if (T::empty()) return 0;
+    else {
+        return auxPriceInTotal(this->root);
+    }
+}
 
+template <class T>
+void Inventari<T>::auxPriceInTotal(const BSTNode<string, FoodPackage>* node) const {
+    float total = 0;
+    if (node != nullptr) {
+        auxPriceInTotal(node->getLeft());
+        total += 1;
+        auxPriceInTotal(node->getRight());
+        return;
+    }
 }
 
 template <class T>
