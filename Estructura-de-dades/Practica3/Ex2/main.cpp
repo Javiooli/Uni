@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <chrono>
 #include <thread>
 
 #include "FoodPackage.h"
@@ -50,7 +49,7 @@ void emplenarInvDeFitxer(Inventari<T>& inv) {
 
 // Executa la accio pertinent depenent de la opcio que s'hagi escollit.
 template <class T>
-void executeOption(const int& option, Inventari<T>& inv) {
+void executeOption(const int& option, Inventari<T>& inv, pair<string, string> dates, string id) {
     switch (option) {
         case 1:
             emplenarInvDeFitxer(inv);
@@ -62,24 +61,36 @@ void executeOption(const int& option, Inventari<T>& inv) {
             inv.printAllReverse();
             break;
         case 4:
+            cout << "Despesa total en inventari: " << inv.priceInTotal() << " euros." << endl << endl;
             break;
         case 5:
+            cout << "Introdueix la primera data (AAAA-MM-DD): "; cin >> dates.first;
+            cout << "Introdueix la segona data (AAAA-MM-DD): "; cin >> dates.second;
+            cout << "Despesa total en inventari entre " << dates.first << " i " << dates.second << ": " << inv.priceInTimeInterval(dates) << " euros." << endl << endl;
             break;
-        default:
+        case 6:
+            cout << "Introdueix la id del producte: "; cin >> id;
+            cout << "Introdueix la primera data (AAAA-MM-DD): "; cin >> dates.first;
+            cout << "Introdueix la segona data (AAAA-MM-DD): "; cin >> dates.second;
+            cout << "Despesa total en inventari del producte " << id << " entre " << dates.first << " i " << dates.second << ": " << inv.priceInTimeIntervalByProduct(dates, id) << " euros." << endl << endl;
             break;
+        case 7:
+            cout << "WIP" << endl;
     }
 }
 
 // main
 int main(){
     int option = 0, exitOption = 8;
-    Inventari<BSTArbre<string, FoodPackage>> inventari(21);
+    Inventari<BSTArbre<string, FoodPackage>> inventari(0.21);
+    pair<string, string> dates;
+    string id;
 
     do {
         try {
             printMenu();                // Imprimir menu
             selectOption(option);       // Escollir opcio
-            executeOption(option, inventari); // Executar opcio escollida
+            executeOption(option, inventari, dates, id); // Executar opcio escollida
         } catch (const exception& ex) {
             cin.clear();
             cin.ignore(1000, '\n');

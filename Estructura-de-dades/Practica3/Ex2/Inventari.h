@@ -23,7 +23,10 @@ class Inventari : protected T {
         int height() const;
     private:
         float iva;
-        void auxPriceInTotal(const BSTNode<string, FoodPackage>* node) const;
+        void auxPrintAll(const BSTNode<string, FoodPackage>* node) const;
+        float auxPriceInTotal(const BSTNode<string, FoodPackage>* node, float& total) const;
+        float auxPriceInTimeInterval(const BSTNode<string, FoodPackage>* node, float& total, pair<string, string> ival) const;
+        float auxPriceInTimeIntervalByProduct(const BSTNode<string, FoodPackage>* node, float& total, const pair<string, string> ival, const string pid) const;
         /* Metodes auxiliars, definiu-los aquí sota */
 };
 
@@ -98,7 +101,20 @@ void Inventari<T>::loadFromFile(string file_path) {
 
 template <class T>
 void Inventari<T>::printAll() const {
-    T::printInorder();
+    if (T::empty()) cout << "L'inventari esta buit." << endl;
+    else {
+        auxPrintAll(this->root);
+        cout << "\n\n";
+    }
+}
+
+template <class T>
+void Inventari<T>::auxPrintAll(const BSTNode<string, FoodPackage>* node) const {
+    if (node != nullptr) {
+        auxPrintAll(node->getLeft());
+        cout << "Dia: " << node->getKey() << ", Nombre de comandes: " << node->getValues().size() << "\n";
+        auxPrintAll(node->getRight());
+    }
 }
 
 template <class T>
@@ -110,33 +126,74 @@ void Inventari<T>::printAllReverse() {
 
 template <class T>
 float Inventari<T>::priceInTotal() const {
+    float total = 0;
     if (T::empty()) return 0;
     else {
-        return auxPriceInTotal(this->root);
+        total = auxPriceInTotal(this->root, total);
+        return total + (total * this->iva);
     }
 }
 
 template <class T>
-void Inventari<T>::auxPriceInTotal(const BSTNode<string, FoodPackage>* node) const {
-    float total = 0;
+float Inventari<T>::auxPriceInTotal(const BSTNode<string, FoodPackage>* node, float& total) const {
     if (node != nullptr) {
-        auxPriceInTotal(node->getLeft());
-        total += 1;
-        auxPriceInTotal(node->getRight());
-        return;
+        auxPriceInTotal(node->getLeft(), total);
+        list<FoodPackage, allocator<FoodPackage>> valors = node->getValues();
+        for (FoodPackage fp : node->getValues()) {
+            total += fp.getPrice() * fp.getAmount();
+        }
+        auxPriceInTotal(node->getRight(), total);
+        return total;
     }
 }
 
 template <class T>
 float Inventari<T>::priceInTimeInterval(pair<string, string> ival) const {
+    float total = 0;
+    if (T::empty()) return 0;
+    else {
+        total = auxPriceInTimeInterval(this->root, total, ival);
+        return total + (total * this->iva);
+    }
+}
 
+template <class T>
+float Inventari<T>::auxPriceInTimeInterval(const BSTNode<string, FoodPackage>* node, float& total, pair<string, string> ival) const {
+    if (node != nullptr) {
+        auxPriceInTimeInterval(node->getLeft(), total, ival);
+        if (node->getKey() >= ival.first && node->getKey() <= ival.second) {
+            for (FoodPackage fp : node->getValues()) {
+                total += fp.getPrice() * fp.getAmount();
+            }
+        }
+        auxPriceInTimeInterval(node->getRight(), total, ival);
+        return total;
+    }
 }
 
 template <class T>
 float Inventari<T>::priceInTimeIntervalByProduct(pair<string, string> ival, string pid) const {
-
+    float total = 0;
+    if (T::empty()) return 0;
+    else {
+        total = auxPriceInTimeIntervalByProduct(this->root, total, ival, pid);
+        return total + (total * this->iva);
+    }
 }
-
+template <class T>
+float Inventari<T>::auxPriceInTimeIntervalByProduct(const BSTNode<string, FoodPackage>* node, float& total, const pair<string, string> ival, const string pid) const {
+    if (node != nullptr) {
+        auxPriceInTimeIntervalByProduct(node->getLeft(), total, ival, pid);
+        if (node->getKey() >= ival.first && node->getKey() <= ival.second) {
+            for (FoodPackage fp : node->getValues()) {
+                if (fp.getProduct_id() == pid)
+                    total += fp.getPrice() * fp.getAmount();
+            }
+        }
+        auxPriceInTimeIntervalByProduct(node->getRight(), total, ival, pid);
+        return total;
+    }
+}
 template <class T>
 int Inventari<T>::size() const {
 
